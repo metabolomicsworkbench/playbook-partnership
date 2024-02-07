@@ -54,7 +54,7 @@ export const MetaboliteCountMatrixFromFile = MetaNode('MetaboliteCountMatrixFrom
    message => props.notify({ type: 'info', message }),
 ))
 .story(props =>
-  `The file${props.inputs && props.inputs.file.description ? ` containing ${props.inputs.file.description}` : ''} was parsed as a gene count matrix.`
+  `The file${props.inputs && props.inputs.file.description ? ` containing ${props.inputs.file.description}` : ''} was parsed as a metabolite count matrix.`
 )
 .build()
 
