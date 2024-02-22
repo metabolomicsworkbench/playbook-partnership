@@ -5,21 +5,20 @@ import { MetaboliteCountMatrix } from '@/components/data/metabolite_count_matrix
 import { norm_icon } from '@/icons'
 
 
-export const ZScoreNormalizeMetaboliteCountMatrix = MetaNode('ZScoreNormalizeMetaboliteCountMatrix')
+export const ComputeCorrelationMatrix = MetaNode('ComputeCorrelationMatrix')
   .meta({
-    label: 'Z Score Normalize A Metabolite Count Matrix',
-    description: 'Z-score normalize a metabolite count matrix, return a metabolite count matrix',
+    label: 'Compute Correlation Matrix for a Metabolite Count Matrix',
+    description: 'Compute Correlation Matrix for a Metabolite Count Matrix, return a Correlation matrix',
     icon: [norm_icon],
   })
   .inputs({ matrix: MetaboliteCountMatrix })
   .output(MetaboliteCountMatrix)
   .resolve(async (props) => await python(
-    'components.data.met_z_score_normalization.z_score_normalize_metabolite_count_matrix',
+    'components.data.metabolite_count_matrix_corr.compute_corr_metabolite_count_matrix',
     { kargs: [props.inputs.matrix]  },
     message => {props.notify({ type: 'info', message }); console.log(message);},
   ))
   .story(props =>
-    `The metabolite count matrix was then Z-score normalized.`
+    `Correlation for the metabolite count matrix was computed.`
   )
   .build()
-  
