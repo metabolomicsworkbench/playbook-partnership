@@ -9,6 +9,10 @@ import { downloadUrl } from '@/utils/download'
 
 const Matrix = dynamic(() => import('@/app/components/Matrix'))
 
+//import below was giving issues, so keeping original
+//import {GeneCountMatrix, GeneCountMatrixFromFile, GeneTranspose} from '@/components/data/count_matrix'
+
+//* Mano block-commented as it is now taken from count_matrix
 export const GeneCountMatrix = MetaNode('GeneCountMatrix')
   .meta({
     label: 'Gene Count Matrix',
@@ -75,3 +79,5 @@ export const Transpose = MetaNode('Transpose')
     `The gene count matrix was then transposed.`
   )
   .build()
+
+//  */ 

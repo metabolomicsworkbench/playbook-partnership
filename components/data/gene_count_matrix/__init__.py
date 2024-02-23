@@ -3,6 +3,30 @@ import numpy as np
 import anndata as ad
 from components.core.file import File, file_as_path, file_as_stream, upsert_file
 
+from components.data.count_matrix import CountMatrix, anndata_from_gctx, anndata_from_gct, anndata_from_file
+from components.data.count_matrix import np_jsonifyable, count_matrix, transpose
+
+# using class and functions defined in components.data.count_matrix to define what was defined in details in this file
+class GeneCountMatrix(CountMatrix):
+  no_additional_fields: None
+
+def anndata_from_gctx(file: File):
+   return(anndata_from_gctx(file))
+
+def anndata_from_gct(file: File):
+   return(anndata_from_gct(file))
+
+def anndata_from_file(file: File):
+   return(anndata_from_file(file))
+
+def gene_count_matrix(file: File) -> GeneCountMatrix:
+    return(count_matrix(file))
+
+def transpose(m: File):
+   return(transpose(m))
+
+# Mano: original code is block-commented beloew
+"""
 class GeneCountMatrix(File, typing.TypedDict):
   shape: typing.Tuple[int, int]
   index: typing.List[str]
@@ -118,3 +142,4 @@ def transpose(m: File):
   with upsert_file('.h5ad') as f:
     d.write_h5ad(f.file)
   return gene_count_matrix(f)
+"""
