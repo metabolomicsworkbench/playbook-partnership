@@ -3,6 +3,8 @@ import numpy as np
 import anndata as ad
 from components.core.file import File, file_as_path, file_as_stream, upsert_file
 
+import sys
+
 # Mano: This file is based on Daniel's original file gene_count_matrix/__init.py
 class CountMatrix(File, typing.TypedDict):
   shape: typing.Tuple[int, int]
@@ -40,6 +42,8 @@ def anndata_from_gct(file: File):
 def anndata_from_file(file: File):
   ''' Read from a bunch of different formats, get an anndata file
   '''
+  #debug = 0;  if(debug > 0): print(f"in count_matrix: anndata_from_file", file=sys.stderr);
+
   if file['filename'].endswith('.h5ad'):
     with file_as_path(file, 'r') as fr:
       return ad.read_h5ad(fr)

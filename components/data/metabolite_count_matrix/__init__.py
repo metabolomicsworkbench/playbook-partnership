@@ -6,23 +6,41 @@ from components.core.file import File, file_as_path, file_as_stream, upsert_file
 from components.data.count_matrix import CountMatrix, anndata_from_gctx, anndata_from_gct, anndata_from_file
 from components.data.count_matrix import np_jsonifyable, count_matrix, transpose
 
+# even simpler: LHS refers to variable in this file, RHS refers to that from components.data.count_matrix
+metanndata_from_file = anndata_from_file;
+metanndata_from_gctx = anndata_from_gctx; 
+metanndata_from_gct = anndata_from_gct;
+transpose = transpose;
+
+class MetaboliteCountMatrix(CountMatrix):
+  no_additional_fields: None
+
+def metabolite_count_matrix(file: File) -> MetaboliteCountMatrix:
+  return(count_matrix(file))
+
+"""
+# Need to use a different name for transpose, else causing recursion since function name in both 
+# components.data.count_matrix and components.data.gene_count_matrix is same
+transpose0 = transpose;
+
 class MetaboliteCountMatrix(CountMatrix):
   no_additional_fields: None
 
 def metanndata_from_gctx(file: File):
-   return(anndata_from_gctx(file))
+  return(anndata_from_gctx(file))
 
 def metanndata_from_gct(file: File):
-   return(anndata_from_gct(file))
+  return(anndata_from_gct(file))
 
 def metanndata_from_file(file: File):
-   return(anndata_from_file(file))
+  return(anndata_from_file(file))
 
 def metabolite_count_matrix(file: File) -> MetaboliteCountMatrix:
-    return(count_matrix(file))
+  return(count_matrix(file))
 
 def transpose(m: File):
-   return(transpose(m))
+  return(transpose0(m))
+"""
 
 """
 class MetaboliteCountMatrix(File, typing.TypedDict):

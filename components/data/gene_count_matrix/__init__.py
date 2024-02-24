@@ -6,24 +6,48 @@ from components.core.file import File, file_as_path, file_as_stream, upsert_file
 from components.data.count_matrix import CountMatrix, anndata_from_gctx, anndata_from_gct, anndata_from_file
 from components.data.count_matrix import np_jsonifyable, count_matrix, transpose
 
+import sys;
+
+# even simpler: LHS refers to variable in this file, RHS refers to that from components.data.count_matrix
+anndata_from_file = anndata_from_file;
+anndata_from_gctx = anndata_from_gctx; 
+anndata_from_gct = anndata_from_gct;
+transpose = transpose;
+
+class GeneCountMatrix(CountMatrix):
+  no_additional_fields: None
+
+def gene_count_matrix(file: File) -> GeneCountMatrix:
+  return(count_matrix(file))
+
+"""
+# Need to use a different name, else causing recursion since function name in both 
+# components.data.count_matrix and components.data.gene_count_matrix is same
+anndata_from_file0 = anndata_from_file;
+anndata_from_gctx0 = anndata_from_gctx; 
+anndata_from_gct0 = anndata_from_gct;
+transpose0 = transpose;
+
 # using class and functions defined in components.data.count_matrix to define what was defined in details in this file
 class GeneCountMatrix(CountMatrix):
   no_additional_fields: None
 
 def anndata_from_gctx(file: File):
-   return(anndata_from_gctx(file))
+  return(anndata_from_gctx0(file))
 
 def anndata_from_gct(file: File):
-   return(anndata_from_gct(file))
+  return(anndata_from_gct0(file))
 
 def anndata_from_file(file: File):
-   return(anndata_from_file(file))
+  #debug = 0;  if(debug > 0): print(f"in gene_count_matrix: anndata_from_file", file=sys.stderr);
+  return(anndata_from_file0(file))
 
 def gene_count_matrix(file: File) -> GeneCountMatrix:
-    return(count_matrix(file))
+  return(count_matrix(file))
 
 def transpose(m: File):
-   return(transpose(m))
+  return(transpose0(m))
+"""
 
 # Mano: original code is block-commented beloew
 """

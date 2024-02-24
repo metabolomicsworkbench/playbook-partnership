@@ -11,7 +11,14 @@ const Matrix = dynamic(() => import('@/app/components/Matrix'))
 
 // How the schema validation works: https://codex.so/zod-validation-en
 // Define codec here later
-//export const CountMatrixC = ;
+export const CountMatrixC = FileC.merge(z.object({
+  shape: z.tuple([z.number(), z.number()]),
+  columns: z.array(z.string()),
+  index: z.array(z.string()),
+  values: z.array(z.array(z.union([z.number(), z.literal('nan'), z.literal('inf'), z.literal('-inf')]))),
+  ellipses: z.tuple([z.union([z.number(), z.null()]), z.union([z.number(), z.null()])]),
+}))
+
 //export type CountMatrixType = z.infer<typeof CountMatrixC>
 
 // Mano: This file is based on Daniel's original file gene_count_matrix/index.tsx
@@ -25,13 +32,7 @@ export const TCountMatrix = [
     description: `A ${id.toLowerCase()} count matrix file`,
     icon: [datafile_icon],
   })
-  .codec(FileC.merge(z.object({
-    shape: z.tuple([z.number(), z.number()]),
-    columns: z.array(z.string()),
-    index: z.array(z.string()),
-    values: z.array(z.array(z.union([z.number(), z.literal('nan'), z.literal('inf'), z.literal('-inf')]))),
-    ellipses: z.tuple([z.union([z.number(), z.null()]), z.union([z.number(), z.null()])]),
-  })))
+  .codec(CountMatrixC)
   .view(props => {
     return (
       <div>
@@ -51,8 +52,8 @@ export const TCountMatrix = [
   .build()
 ) // matches map
 // The two resolver names will be: GeneCountMatrix & MetaboliteCountMatrix
-export const GeneCountMatrix = TCountMatrix[0];
-export const MetaboliteCountMatrix = TCountMatrix[1];
+//export const GeneCountMatrix = TCountMatrix[0];
+//export const MetaboliteCountMatrix = TCountMatrix[1];
   
 export const TCountMatrixFromFile = [
   { id: 'Gene'},
@@ -75,8 +76,8 @@ export const TCountMatrixFromFile = [
   )
   .build()
 )
-export const GeneCountMatrixFromFile = TCountMatrixFromFile[0];;
-export const MetaboliteCountMatrixFromFile = TCountMatrixFromFile[0];;
+//export const GeneCountMatrixFromFile = TCountMatrixFromFile[0];;
+//export const MetaboliteCountMatrixFromFile = TCountMatrixFromFile[0];;
 
 export const TTranspose = [
   { id: 'Gene'},
@@ -99,5 +100,5 @@ export const TTranspose = [
   )
   .build()
 )
-export const GeneTranspose = TTranspose[0];
-export const MetaboliteTranspose = TTranspose[0];
+//export const GeneTranspose = TTranspose[0];
+//export const MetaboliteTranspose = TTranspose[0];

@@ -6,14 +6,16 @@ import sys
 
 def z_score_normalize_metabolite_count_matrix(m: MetaboliteCountMatrix):
   df = metanndata_from_file(m)
-  
-  debug = 1;
+
+  ddof = 0; # 0 or 1: use 0 since Daniel is not specifying, defaulting to 0
+
+  debug = 0;
 
   if(debug > 0): print(f"type of df: {type(df)}", file=sys.stderr);
   if(debug > 0): print(f"before z-score: type of df.X: {type(df.X)}, shape of df.X: {df.X.shape}", file=sys.stderr);
 
   # z-score normalization: axis = 0 means do along columns (each column is a variable) i.e., across the rows
-  df.X = zscore(df.X, axis=0, ddof=1, nan_policy = 'omit')
+  df.X = zscore(df.X, axis=0, ddof=ddof, nan_policy = 'omit')
 
   if(debug > 0): print(f"after z-score: type of df.X: {type(df.X)}, shape of df.X: {df.X.shape}", file=sys.stderr);
 
@@ -36,4 +38,3 @@ def z_score_normalize_metabolite_count_matrix(m: MetaboliteCountMatrix):
     df.write_h5ad(f.file)
 
   return metabolite_count_matrix(f)
-

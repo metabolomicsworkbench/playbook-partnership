@@ -9,10 +9,12 @@ import { downloadUrl } from '@/utils/download'
 
 const Matrix = dynamic(() => import('@/app/components/Matrix'))
 
-//import below was giving issues, so keeping original
-//import {GeneCountMatrix, GeneCountMatrixFromFile, GeneTranspose} from '@/components/data/count_matrix'
+import {TCountMatrix, TCountMatrixFromFile, TTranspose} from '@/components/data/count_matrix'
+export const GeneCountMatrix = TCountMatrix[0];
+export const GeneCountMatrixFromFile = TCountMatrixFromFile[0];
+export const Transpose = TTranspose[0];
 
-//* Mano block-commented as it is now taken from count_matrix
+/* Mano block-commented as it is now taken from count_matrix
 export const GeneCountMatrix = MetaNode('GeneCountMatrix')
   .meta({
     label: 'Gene Count Matrix',
@@ -80,4 +82,4 @@ export const Transpose = MetaNode('Transpose')
   )
   .build()
 
-//  */ 
+  */ 

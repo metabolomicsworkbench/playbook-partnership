@@ -95,6 +95,14 @@ import * as data_characteristic_direction from "./data/characteristic_direction"
 import data_characteristic_direction_packageJson from "./data/characteristic_direction/package.json"
 metanodes.push(...MetaNodesFromExports(data_characteristic_direction, data_characteristic_direction_packageJson))
 components.push("data/characteristic_direction")
+import * as data_count_matrix from "./data/count_matrix"
+import data_count_matrix_packageJson from "./data/count_matrix/package.json"
+metanodes.push(...MetaNodesFromExports(data_count_matrix, data_count_matrix_packageJson))
+components.push("data/count_matrix")
+import * as data_count_matrix_corr from "./data/count_matrix_corr"
+import data_count_matrix_corr_packageJson from "./data/count_matrix_corr/package.json"
+metanodes.push(...MetaNodesFromExports(data_count_matrix_corr, data_count_matrix_corr_packageJson))
+components.push("data/count_matrix_corr")
 import * as data_drug_matrix_transpose from "./data/drug_matrix_transpose"
 import data_drug_matrix_transpose_packageJson from "./data/drug_matrix_transpose/package.json"
 metanodes.push(...MetaNodesFromExports(data_drug_matrix_transpose, data_drug_matrix_transpose_packageJson))
@@ -135,10 +143,6 @@ import * as data_metabolite_count_matrix from "./data/metabolite_count_matrix"
 import data_metabolite_count_matrix_packageJson from "./data/metabolite_count_matrix/package.json"
 metanodes.push(...MetaNodesFromExports(data_metabolite_count_matrix, data_metabolite_count_matrix_packageJson))
 components.push("data/metabolite_count_matrix")
-import * as data_metabolite_count_matrix_corr from "./data/count_matrix_corr"
-import data_metabolite_count_matrix_corr_packageJson from "./data/count_matrix_corr/package.json"
-metanodes.push(...MetaNodesFromExports(data_metabolite_count_matrix_corr, data_metabolite_count_matrix_corr_packageJson))
-components.push("data/metabolite_count_matrix_corr")
 import * as data_metadata_matrix from "./data/metadata_matrix"
 import data_metadata_matrix_packageJson from "./data/metadata_matrix/package.json"
 metanodes.push(...MetaNodesFromExports(data_metadata_matrix, data_metadata_matrix_packageJson))

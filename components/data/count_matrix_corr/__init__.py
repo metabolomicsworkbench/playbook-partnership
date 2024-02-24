@@ -20,10 +20,12 @@ def compute_corr_matrix(df1, df2 = None):
   compute_corr_matrix(x)
   """
 
+  ddof = 0; # 0 or 1: use 0 since Daniel is not specifying, defaulting to 0
+
   debug = 0;
 
   # z-score normalization: axis = 0 means do along columns (each column is a variable) i.e., across the rows
-  df1 = zscore(df1, axis=0, ddof=1, nan_policy = 'omit')
+  df1 = zscore(df1, axis=0, ddof=ddof, nan_policy = 'omit')
 
   if(debug > 0): print(f"after z-score: type of df1: {type(df1)}, shape of df1: {df1.shape}", file=sys.stderr);
 
@@ -31,12 +33,12 @@ def compute_corr_matrix(df1, df2 = None):
   df1 = df1[:, ~np.isnan(df1).any(axis=0)]
 
   if df2 is None:
-    r = np.dot(df1.T, df1)/(df1.shape[0] - 1);
+    r = np.dot(df1.T, df1)/(df1.shape[0] - ddof);
   else:
     #if(df1.shape[0] != (df2.shape[0]): raise exception
     df2 = zscore(df2, axis=0, ddof=1, nan_policy = 'omit')
     df2 = df2[:, ~np.isnan(df2).any(axis=0)]
-    r = np.dot(df1.T, df2)/(df1.shape[0] - 1);
+    r = np.dot(df1.T, df2)/(df1.shape[0] - ddof);
     # if df=np.hstack((df1,df2)) and rz = compute_corr_matrix(df), 
     # then r should be same as rz[0:df1.shape[1],df1.shape[1]:df.shape[1]]
 
@@ -53,7 +55,7 @@ def correlation_matrix(file: File) -> CorrelationMatrix:
     return(count_matrix(file))
 
 def compute_corr_count_matrix(m: typing.Union[MetaboliteCountMatrix, GeneCountMatrix]) -> CorrelationMatrix:
-  debug = 1;
+  debug = 0;
 
   df = anndata_from_file(m);
   #if(isinstance(m, GeneCountMatrix)):
@@ -74,3 +76,30 @@ def compute_corr_count_matrix(m: typing.Union[MetaboliteCountMatrix, GeneCountMa
     adata.write_h5ad(f.file)
 
   return count_matrix(f)
+
+def compute_corr_count_matrix2(m1: MetaboliteCountMatrix, m2: GeneCountMatrix) -> CorrelationMatrix:
+  debug = 1;
+
+  df1 = anndata_from_file(m1);
+  df2 = anndata_from_file(m2);
+  #if(isinstance(m, GeneCountMatrix)):
+  #  df = anndata_from_file(m);
+  #elif(isinstance(m, MetaboliteCountMatrix)):
+  #  df = metanndata_from_file(m);
+
+  if(debug > 0): 
+    print(f"type of df1: {type(df1)}", file=sys.stderr);  
+    print(f"type of df2: {type(df2)}", file=sys.stderr);  
+
+  rdf = compute_corr_matrix(df1.X, df2.X);
+  if(debug > 0): print(f"type of rdf: {type(rdf)}", file=sys.stderr);
+
+  adata = ad.AnnData(rdf); # Ref: https://anndata.readthedocs.io/en/latest/index.html
+  adata.var_names = df1.var_names;
+  adata.obs_names = df2.var_names;
+
+  with upsert_file('.h5ad') as f:
+    adata.write_h5ad(f.file)
+
+  return count_matrix(f)
+

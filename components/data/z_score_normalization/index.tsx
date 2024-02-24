@@ -1,25 +1,27 @@
 import React from 'react'
 import { MetaNode } from '@/spec/metanode'
 import python from '@/utils/python'
-import { MetaboliteCountMatrix } from '@/components/data/metabolite_count_matrix'
+import { GeneCountMatrix } from '@/components/data/gene_count_matrix'
 import { norm_icon } from '@/icons'
 
 
-export const ZScoreNormalizeMetaboliteCountMatrix = MetaNode('ZScoreNormalizeMetaboliteCountMatrix')
+export const ZScoreNormalizeGeneCountMatrix = MetaNode('ZScoreNormalizeGeneCountMatrix')
   .meta({
-    label: 'Z Score Normalize A Metabolite Count Matrix',
-    description: 'Z-score normalize a metabolite count matrix, return a metabolite count matrix',
+    label: 'Z Score Normalize A Gene Count Matrix',
+    description: 'Z-score normalize a gene count matrix, return a gene count matrix',
     icon: [norm_icon],
   })
-  .inputs({ matrix: MetaboliteCountMatrix })
-  .output(MetaboliteCountMatrix)
+  .inputs({ matrix: GeneCountMatrix })
+  .output(GeneCountMatrix)
   .resolve(async (props) => await python(
-    'components.data.met_z_score_normalization.z_score_normalize_metabolite_count_matrix',
+    'components.data.z_score_normalization.z_score_normalize_gene_count_matrix',
     { kargs: [props.inputs.matrix]  },
+    //message => props.notify({ type: 'info', message }),
     message => {props.notify({ type: 'info', message }); console.log(message);},
+
   ))
   .story(props =>
-    `The metabolite count matrix was then Z-score normalized.`
+    `The gene count matrix was then Z-score normalized.`
   )
   .build()
   

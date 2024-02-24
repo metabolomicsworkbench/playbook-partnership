@@ -9,6 +9,12 @@ import { downloadUrl } from '@/utils/download'
 
 const Matrix = dynamic(() => import('@/app/components/Matrix'))
 
+import {TCountMatrix, TCountMatrixFromFile, TTranspose} from '@/components/data/count_matrix'
+export const MetaboliteCountMatrix = TCountMatrix[1];
+export const MetaboliteCountMatrixFromFile = TCountMatrixFromFile[1];
+export const Transpose = TTranspose[1];
+
+/* Mano block-commented as it is now taken from count_matrix
 export const MetaboliteCountMatrix = MetaNode('MetaboliteCountMatrix')
 .meta({
     label: 'Metabolite Count Matrix',
@@ -57,4 +63,4 @@ export const MetaboliteCountMatrixFromFile = MetaNode('MetaboliteCountMatrixFrom
   `The file${props.inputs && props.inputs.file.description ? ` containing ${props.inputs.file.description}` : ''} was parsed as a metabolite count matrix.`
 )
 .build()
-
+*/
