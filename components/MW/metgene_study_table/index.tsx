@@ -51,11 +51,13 @@ export const MetGeneStudyTable = MetaNode('MetGeneStudyTable')
 
           var study_id_arr = all_study_ids.split(", ")
 
-
+          const match = val.KEGG_COMPOUND_ID.match(/>(.*?)<\/a>/); // Regular expression to extract text between <a> tags
+          const cpd_id = match ? match[1] : ''; // Extracted compound ID
+          // Below, one of the rows was: <td>{ val.KEGG_COMPOUND_ID }</td>
           return (
             <tr key={key}>
               <>
-              <td>{ val.KEGG_COMPOUND_ID }</td>
+              <td><a href = {`https://www.genome.jp/entry/cpd:${cpd_id}`} target = "_blank">{cpd_id}</a> </td>              
               <td><a href = {`https://www.metabolomicsworkbench.org/databases/refmet/refmet_details.php?REFMET_NAME=${val.REFMET_NAME}`} target = "_blank">{val.REFMET_NAME}</a></td>
               <td>
                 {study_id_arr.map((study_id: string, i: number) =>
