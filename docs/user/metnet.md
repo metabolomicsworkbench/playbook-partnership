@@ -31,6 +31,8 @@ The results are available on the next screen (Figure 4). There are several compo
 ![Results of MetNet analysis as a list of text/json/pdf files](./figures/metnet/fig4-metnet-results.png)
 Figure 4. Results of MetENP analysis on the list of metabolites.
 
+This workflow can be accessed at: https://playbook-workflow-builder.cloud/report/a8112809-1910-96b1-0891-98920eb3df8b.
+
 ## Learn More
 
 [Find other topics in the Playbook Workflow Builder user guide](./index.md).
