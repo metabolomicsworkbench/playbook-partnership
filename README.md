@@ -10,6 +10,7 @@ Quick Links:
   - [Publishing Workfows as BioCompute Objects](./docs/user/biocompute.md)
   - [Metabolomics GeneID User Guide](./docs/user/geneidconv.md)
   - [Metabolomics MetGENE User Guide](./docs/user/metgene.md)
+  - [Metabolomics MetGENE User Guide](./docs/user/metnet.md)
   - [Using the Playbook with CAVATICA](./docs/user/cavatica.md)
   - [Using the Playbook REST API](./docs/user/api.md)
 - [Developer Guide](./docs/index.md)
