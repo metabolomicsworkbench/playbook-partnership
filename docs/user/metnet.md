@@ -28,7 +28,7 @@ Figure 3. Select "Perform MetENP analysis on a list of metabolites (no numeric d
 
 The results are available on the next screen (Figure 4). There are several components of the results, including "Metabolite class enrichment table", "Metabolite KEGG pathway network", "Metabolite related gene names and Entrez IDs", etc. This tool and API is a work in progress and more features, such as separating the different components of the results, will be added, so that other APIs available through the WBT can be used to expand the workflow constructed.
 
-![Results of MetNet analysis as a list of text/json/pdf files](./figures/metnet/fig3-metnet.png)
+![Results of MetNet analysis as a list of text/json/pdf files](./figures/metnet/fig4-metnet-results.png)
 Figure 4. Results of MetENP analysis on the list of metabolites.
 
 ## Learn More
